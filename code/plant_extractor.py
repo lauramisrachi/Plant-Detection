@@ -73,8 +73,7 @@ class PlantExtractor(object):
         b = b_star / sum_star
         
         return 3 * g - 2.4 * r - b
-            
-            
+              
     def apply_threshold(self, img):
         """ Apply threshold to build a binary image.
         
@@ -89,8 +88,7 @@ class PlantExtractor(object):
                                        255, cv2.THRESH_BINARY)
 
         return thresholded
-    
-    
+
     def apply_erosion_and_dilatation(self, img):
         """Apply erosion (to remove noise and keep region of interest) and dilatation
         (further highlight the rois) to the input image.
@@ -113,7 +111,6 @@ class PlantExtractor(object):
         dilated = cv2.dilate(erosion, dilatation_kernel, iterations=2)
         
         return dilated
-
 
     def get_bounding_boxes(self, img):
         """ Function that returns the plant-region labels using bounding boxes.
@@ -146,8 +143,7 @@ class PlantExtractor(object):
                 contour_list.append([x, y, w, h])
                 
         return contour_list
-    
-    
+
     def save_img_with_bounding_box(self, img, new_img_name):
         """ Successively apply the steps for plant detection on the input image
         (binary threshold, erosion and dilatation, contours finding). Save the newly
