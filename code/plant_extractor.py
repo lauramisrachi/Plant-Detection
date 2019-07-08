@@ -19,15 +19,15 @@ class PlantExtractor(object):
     and label them using bounding boxes. The algorithm uses the ExG-ExR vegetation
     index presented in the README file.
 
-    INPUTS : 
-        - save_path (str): path to the saving directory.
-        - binary_threshold (float): the threshold used to define a region containing plant
+    Arguments:
+        save_path (str): path to the saving directory.
+        binary_threshold (float): the threshold used to define a region containing plant
         VS the opposite.
-        - erosion_kernel_size (tuple): size of the kernel used for the erosion process
+        erosion_kernel_size (tuple): size of the kernel used for the erosion process
         applied to the binary image
-        - dilatation_kernel_size (tuple): size of the kernel used for the dilatation
+        dilatation_kernel_size (tuple): size of the kernel used for the dilatation
         process applied to the binary image
-        - min_bounding_box_size (int) : minimum width or height of the labelling
+        min_bounding_box_size (int) : minimum width or height of the labelling
         bounding box.
     """
 
@@ -56,11 +56,11 @@ class PlantExtractor(object):
     def compute_ExGExR_img(self, img):
         """ Computes the ExG-ExR version of an input image.
         
-        INPUT :
-            - img (np.ndarray) : a 3-channel image (RGB)
+        Arguments:
+            img (np.ndarray) : a 3-channel image (RGB)
         
-        OUTPUT : 
-            - (np.ndarray): 1 channel grayscale image
+        Returns:
+            (np.ndarray): 1 channel grayscale image
         """
         
         r_star = img[:, :, 0] / 255
@@ -77,10 +77,10 @@ class PlantExtractor(object):
     def apply_threshold(self, img):
         """ Apply threshold to build a binary image.
         
-        INPUT : 
-            - img (np.ndarray) : input grayscale image
+        Arguments:
+            img (np.ndarray) : input grayscale image
             
-        OUTPUT : 
+        Returns:
             thresholded (np.ndarray) : binary version of the image.
         """
         
@@ -93,11 +93,11 @@ class PlantExtractor(object):
         """Apply erosion (to remove noise and keep region of interest) and dilatation
         (further highlight the rois) to the input image.
         
-        INPUT : 
-            - img : grayscale image 
+        Arguments:
+            img (np.ndarray): grayscale image
             
-        OUTPUT : 
-            - dilated : grayscale image to which erosion and dilatation processes
+        Returns:
+            dilated (np.ndarray): grayscale image to which erosion and dilatation processes
             has been applied.
         """
         
@@ -117,12 +117,12 @@ class PlantExtractor(object):
         Only the ROI with a width or height superior to min_bounding_box_size
         are considered of interest.
         
-        INPUT : 
-            - img : the initial img (as a grayscale image)
+        Arguments:
+            img (np.ndarray): the initial img (as a grayscale image)
             
-        OUTPUT : 
-            - contour_list: a list containing element with the following shape:
-                [x, y, w, h] providing the coordinates of the bounding boxes.
+        Returns:
+            contour_list (list): a list containing element with the following shape:
+            [x, y, w, h] providing the coordinates of the bounding boxes.
         """
 
         imgMod = self.compute_ExGExR_img(img)
@@ -149,9 +149,9 @@ class PlantExtractor(object):
         (binary threshold, erosion and dilatation, contours finding). Save the newly
         generated image under its provided filename.
 
-        INPUTS : 
-            - img (np.ndarray): 3-channel input image (RGB)
-            - new_img_name (str): name of the newly generated image (with bounding boxes)
+        Arguments:
+            img (np.ndarray): 3-channel input image (RGB)
+            new_img_name (str): name of the newly generated image (with bounding boxes)
         """
         
         print('Plants are being detected ...')

@@ -4,7 +4,9 @@ from data_loader import DataLoader
 from plant_extractor import PlantExtractor
 from utils import get_filename
 
+
 def call_params():
+    """ Parse the script parameters from bash input. """
 
     parser = argparse.ArgumentParser()
 
@@ -25,6 +27,8 @@ def call_params():
 
 
 def detect_plant(args):
+    """ Apply the plant detection pipeline. """
+
     verboseprint = print if args.verbose else lambda *a, **k: None
 
     data_loader = DataLoader(args.data_path)

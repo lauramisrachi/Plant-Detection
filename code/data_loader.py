@@ -16,8 +16,8 @@ from utils import get_images_filenames
 class DataLoader(object):
     """ Class defining a data loader object to load the images as numpy arrays.
     
-    INPUT:
-        - data_path (str): path file were the data can be found.
+    Arguments:
+        data_path (str): path file were the data can be found.
     """
     
     def __init__(self, data_path):
